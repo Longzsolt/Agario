@@ -41,3 +41,16 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.csproj
+App.config
+*.exe
+bin/Debug/Agario.pdb
+*.config
+*.txt
+obj/Debug/Agario.csproj.GenerateResource.Cache
+*.resources
+obj/Debug/Agario.pdb
+*.cache
+obj/Debug/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
+Properties/AssemblyInfo.cs
+Properties/Settings.Designer.cs
