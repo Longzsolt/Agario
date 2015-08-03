@@ -14,25 +14,33 @@ namespace ConsoleApplication1
     {
 
 
-        public Gombok[] gomb = new Gombok[10];
+        public List <Gombok> GombList = new List <Gombok>();
 
         private Random rnd = new Random();
 
         public Matrix()
         {
 
-            for (int i = 0; i < 10; i++)
-            {
-                gomb[i] = new Gombok();
-            }
+            Add(0);
 
-            for (int i = 0; i < gomb.Length; i++)
-            {
+        }
 
-                gomb[i].setX(rnd.Next(0, 80));
-                gomb[i].setY(rnd.Next(0, 60));
-                gomb[i].setName("gomb" + i);
-            }
+
+        public void Add(int i)
+        {
+
+            Gombok gomb = new Gombok();
+            gomb.setX(rnd.Next(0, 80));
+            gomb.setY(rnd.Next(0, 60));
+            gomb.setName("gomb" + i);
+            GombList.Add(gomb);
+
+        }
+
+        public void Remove ()
+        {
+
+            GombList.RemoveAt(GombList.Count);
 
         }
 
@@ -79,15 +87,12 @@ namespace ConsoleApplication1
 
         public bool collision()
         {
-            for (int i = 0; i < 8; i++)
+            for (var it = 0; it < GombList.Count - 1 ; it++)
             {
-                for (int j = i + 1; j < 9; j++)
+                for (var i = 0; i < GombList.Count; i++)
                 {
-                    if (gomb[i].getX() == gomb[j].getX() && gomb[i].getY() == gomb[j].getY())
-
-                        return true;
+                    if (GombList[it].getX() == GombList[i].getX() && GombList[it].getY() == GombList[i].getY()) return true;
                 }
-
             }
 
             return false;
