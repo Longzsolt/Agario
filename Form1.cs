@@ -21,9 +21,12 @@ namespace Agario
         public Form1()
         {
             i = 0;
+
             InitializeComponent();
 
             this.KeyPress += new KeyPressEventHandler(Form1_KeyPress);
+            textBox1.Text = "gomb" + i;
+
         }
 
 
@@ -58,7 +61,7 @@ namespace Agario
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            //textBox1.Text = "gomb" + i;
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
