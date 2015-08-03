@@ -46,41 +46,36 @@ namespace ConsoleApplication1
 
         public void moveDIR(Gombok gombA, int dir)
         {
-            if (dir == 0)
+            switch (dir)
             {
-                gombA.moveUP();
-            }
-            if (dir == 1)
-            {
-                gombA.moveUP();
-                gombA.moveRIGHT();
-            }
-            if (dir == 2)
-            {
-                gombA.moveRIGHT();
-            }
-            if (dir == 3)
-            {
-                gombA.moveRIGHT();
-                gombA.moveDOWN();
-            }
-            if (dir == 4)
-            {
-                gombA.moveDOWN();
-            }
-            if (dir == 5)
-            {
-                gombA.moveDOWN();
-                gombA.moveLEFT();
-            }
-            if (dir == 6)
-            {
-                gombA.moveLEFT();
-            }
-            if (dir == 7)
-            {
-                gombA.moveLEFT();
-                gombA.moveUP();
+                case 0: 
+                    gombA.moveUP();
+                    break;
+                case 1:
+                      gombA.moveUP();
+                      gombA.moveRIGHT();
+                      break;
+                case 2:
+                      gombA.moveRIGHT();
+                      break;
+                case 3:
+                      gombA.moveRIGHT();
+                      gombA.moveDOWN();
+                      break;
+                case 4:
+                      gombA.moveDOWN();
+                      break;
+                case 5:
+                      gombA.moveDOWN();
+                      gombA.moveLEFT();
+                      break;
+                case 6:
+                      gombA.moveLEFT();
+                      break;
+                case 7:
+                      gombA.moveLEFT();
+                      gombA.moveUP();
+                      break;
             }
 
         }
