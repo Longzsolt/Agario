@@ -26,15 +26,25 @@ namespace Agario
         Random rnd = new Random();
         Matrix matrix1 = new Matrix();
         public int i;
+        private int curX, curY;
+        Image<Bgr, Byte> img = new Image<Bgr, Byte>(868, 301, new Bgr(255, 255, 255));
 
-
+        
 
         public Form1()
         {
-
-            i = 0;
-
             InitializeComponent();
+
+          //  img[200, 300] = new Bgr(0, 0, 0);
+
+            imageBox1.Image = img;
+            curX = matrix1.GombList.ElementAt(0).getX();
+            curY = matrix1.GombList.ElementAt(0).getY();
+            i = 0;
+            Image_move();
+            imageBox1.Image = img;
+
+
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             //this.KeyPress += new KeyPressEventHandler(Form1_KeyPress);
@@ -43,6 +53,37 @@ namespace Agario
 
 
         }
+
+        private void Image_move()
+        {
+            if (curX != matrix1.GombList.ElementAt(0).getX() || curY != matrix1.GombList.ElementAt(0).getY())
+            {
+                for (int i = curY; i < curY + 4; i++)
+                {
+                    for (int j = curX; j < curX + 4; j++)
+                    {
+                        img[i, j] = new Bgr(255, 255, 255);
+                    }
+                }
+
+            }
+            curX = matrix1.GombList.ElementAt(0).getX();
+            curY = matrix1.GombList.ElementAt(0).getY();
+
+
+            for (int i = matrix1.GombList.ElementAt(0).getY(); i < matrix1.GombList.ElementAt(0).getY() + 4; i++)
+            {
+                for (int j = matrix1.GombList.ElementAt(0).getX(); j < matrix1.GombList.ElementAt(0).getX() + 4; j++)
+                {
+                    img[i, j] = new Bgr(0, 0, 0);
+                }
+            }
+
+            imageBox1.Image = img;
+
+        }
+
+
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -67,24 +108,25 @@ namespace Agario
             {
                 if (key == Keys.W)
                 {
-                    matrix1.moveDIR(matrix1.GombList.ElementAt(i), 0);
-                    textBox3.Text = matrix1.GombList.ElementAt(i).getY().ToString();
+                    matrix1.moveDIR(matrix1.GombList.ElementAt(0), 0);
+                    //textBox3.Text = matrix1.GombList.ElementAt(0).getY().ToString();
                 }
                 if (key == Keys.A)
                 {
-                    matrix1.moveDIR(matrix1.GombList.ElementAt(i), 6);
-                    textBox2.Text = matrix1.GombList.ElementAt(i).getX().ToString();
+                    matrix1.moveDIR(matrix1.GombList.ElementAt(0), 6);
+                    //textBox2.Text = matrix1.GombList.ElementAt(0).getX().ToString();
                 }
                 if (key == Keys.S)
                 {
-                    matrix1.moveDIR(matrix1.GombList.ElementAt(i), 4);
-                    textBox3.Text = matrix1.GombList.ElementAt(i).getY().ToString();
+                    matrix1.moveDIR(matrix1.GombList.ElementAt(0), 4);
+                    //textBox3.Text = matrix1.GombList.ElementAt(0).getY().ToString();
                 }
                 if (key == Keys.D)
                 {
-                    matrix1.moveDIR(matrix1.GombList.ElementAt(i), 2);
-                    textBox2.Text = matrix1.GombList.ElementAt(i).getX().ToString();
+                    matrix1.moveDIR(matrix1.GombList.ElementAt(0), 2);
+                   // textBox2.Text = matrix1.GombList.ElementAt(0).getX().ToString();
                 }
+                Image_move();
             }
         }
 
@@ -98,7 +140,17 @@ namespace Agario
         {
 
             matrix1.Add(i);
-
+            foreach(var gomb in matrix1.GombList)
+            {
+                for (int a = gomb.getY(); a < gomb.getY() + 4; a++)
+                {
+                    for (int b = gomb.getX(); b < gomb.getX() + 4; b++)
+                    {
+                        img[a, b] = new Bgr(0, 0, 0);
+                    }
+                }
+                imageBox1.Image = img;
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)

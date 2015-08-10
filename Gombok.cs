@@ -10,8 +10,8 @@ namespace ConsoleApplication1
     {
         private int x;
         private int y;
-        private int xMax;
-        private int yMax;
+        public int xMax;
+        public int yMax;
         private string Name;
         private Random rnd = new Random();
 
@@ -19,8 +19,8 @@ namespace ConsoleApplication1
         {
             this.x = 1;
             this.y =  1;
-            this.xMax = 80;
-            this.yMax = 60;
+            this.xMax = 800;
+            this.yMax = 300;
             this.Name = "gomb";
 
         }

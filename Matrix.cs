@@ -30,8 +30,8 @@ namespace ConsoleApplication1
         {
 
             Gombok gomb = new Gombok();
-            gomb.setX(rnd.Next(0, 80));
-            gomb.setY(rnd.Next(0, 60));
+            gomb.setX(rnd.Next(0,gomb.xMax));
+            gomb.setY(rnd.Next(0,gomb.yMax));
             gomb.setName("gomb" + i);
             GombList.Add(gomb);
 
