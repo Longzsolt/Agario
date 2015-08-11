@@ -89,8 +89,6 @@ namespace Agario
 
         }
 
-
-
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (pressedKeys.Count == 0) pressedKeys.Add(e.KeyCode);
