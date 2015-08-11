@@ -22,7 +22,7 @@ namespace ConsoleApplication1
         {
 
             Add(0);
-
+            GombList.ElementAt(0).setSize(4);
         }
 
 
@@ -30,6 +30,7 @@ namespace ConsoleApplication1
         {
 
             Gombok gomb = new Gombok();
+            gomb.setSize(rnd.Next(0, 20));
             gomb.setX(rnd.Next(0,gomb.xMax));
             gomb.setY(rnd.Next(0,gomb.yMax));
             gomb.setName("gomb" + i);
@@ -82,13 +83,19 @@ namespace ConsoleApplication1
 
         public bool collision()
         {
-            for (var it = 0; it < GombList.Count - 1 ; it++)
-            {
-                for (var i = 0; i < GombList.Count; i++)
+                foreach(var gombj in GombList)
                 {
-                    if (GombList[it].getX() == GombList[i].getX() && GombList[it].getY() == GombList[i].getY()) return true;
+                    if (GombList.ElementAt(0) != gombj)
+                    {
+                        if ((GombList.ElementAt(0).getX() <= gombj.getX() + gombj.getSize() && GombList.ElementAt(0).getX() >= gombj.getX()) && (GombList.ElementAt(0).getY() >= gombj.getY() && GombList.ElementAt(0).getY() <= gombj.getY() + gombj.getSize())) return true;
+                        if ((GombList.ElementAt(0).getX() >= gombj.getX() && GombList.ElementAt(0).getX() <= gombj.getX() + gombj.getSize()) && (GombList.ElementAt(0).getY()+GombList.ElementAt(0).getSize() >= gombj.getY() && GombList.ElementAt(0).getY()+GombList.ElementAt(0).getSize() <= gombj.getY()+gombj.getSize())) return true;
+                        if ((GombList.ElementAt(0).getX() + GombList.ElementAt(0).getSize() >= gombj.getX() && GombList.ElementAt(0).getX() + GombList.ElementAt(0).getSize() <= gombj.getX() + gombj.getSize()) && (GombList.ElementAt(0).getY() >= gombj.getY() && GombList.ElementAt(0).getY() <= gombj.getY()+gombj.getSize())) return true;
+                        if ((GombList.ElementAt(0).getY()+GombList.ElementAt(0).getSize() >= gombj.getY() && GombList.ElementAt(0).getY() <= gombj.getY()+gombj.getSize())  )return true;
+                    }
                 }
-            }
+
+            
+
 
             return false;
         }

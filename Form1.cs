@@ -58,9 +58,9 @@ namespace Agario
         {
             if (curX != matrix1.GombList.ElementAt(0).getX() || curY != matrix1.GombList.ElementAt(0).getY())
             {
-                for (int i = curY; i < curY + 4; i++)
+                for (int i = curY; i < curY + matrix1.GombList.ElementAt(0).getSize()+1; i++)
                 {
-                    for (int j = curX; j < curX + 4; j++)
+                    for (int j = curX; j < curX + matrix1.GombList.ElementAt(0).getSize() + 1; j++)
                     {
                         img[i, j] = new Bgr(255, 255, 255);
                     }
@@ -70,10 +70,16 @@ namespace Agario
             curX = matrix1.GombList.ElementAt(0).getX();
             curY = matrix1.GombList.ElementAt(0).getY();
 
-
-            for (int i = matrix1.GombList.ElementAt(0).getY(); i < matrix1.GombList.ElementAt(0).getY() + 4; i++)
+            if (matrix1.collision())
             {
-                for (int j = matrix1.GombList.ElementAt(0).getX(); j < matrix1.GombList.ElementAt(0).getX() + 4; j++)
+
+                MessageBox.Show("Oops");
+
+            }
+
+            for (int i = matrix1.GombList.ElementAt(0).getY(); i < matrix1.GombList.ElementAt(0).getY() + matrix1.GombList.ElementAt(0).getSize() + 1; i++)
+            {
+                for (int j = matrix1.GombList.ElementAt(0).getX(); j < matrix1.GombList.ElementAt(0).getX() + matrix1.GombList.ElementAt(0).getSize() + 1; j++)
                 {
                     img[i, j] = new Bgr(0, 0, 0);
                 }
@@ -142,9 +148,9 @@ namespace Agario
             matrix1.Add(i);
             foreach(var gomb in matrix1.GombList)
             {
-                for (int a = gomb.getY(); a < gomb.getY() + 4; a++)
+                for (int a = gomb.getY(); a < gomb.getY() + gomb.getSize()+1; a++)
                 {
-                    for (int b = gomb.getX(); b < gomb.getX() + 4; b++)
+                    for (int b = gomb.getX(); b < gomb.getX() + gomb.getSize()+1; b++)
                     {
                         img[a, b] = new Bgr(0, 0, 0);
                     }

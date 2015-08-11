@@ -10,6 +10,7 @@ namespace ConsoleApplication1
     {
         private int x;
         private int y;
+        private int size;
         public int xMax;
         public int yMax;
         private string Name;
@@ -19,6 +20,7 @@ namespace ConsoleApplication1
         {
             this.x = 1;
             this.y =  1;
+            this.size = 4;
             this.xMax = 800;
             this.yMax = 300;
             this.Name = "gomb";
@@ -57,6 +59,20 @@ namespace ConsoleApplication1
         public string getName()
         {
             return Name;
+        }
+
+        public void setSize(int size)
+        {
+
+            this.size = size;
+
+        }
+
+        public int getSize()
+        {
+
+            return size-1;
+
         }
 
         public void moveUP()
