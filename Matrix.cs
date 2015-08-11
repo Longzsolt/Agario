@@ -13,6 +13,7 @@ namespace ConsoleApplication1
     public class Matrix
     {
 
+        public Gombok collgomb;
 
         public List <Gombok> GombList = new List <Gombok>();
 
@@ -20,7 +21,7 @@ namespace ConsoleApplication1
 
         public Matrix()
         {
-
+            collgomb = new Gombok();
             Add(0);
             GombList.ElementAt(0).setSize(4);
         }
@@ -41,7 +42,7 @@ namespace ConsoleApplication1
         public void Remove ()
         {
 
-            GombList.RemoveAt(GombList.Count);
+            GombList.RemoveAt(GombList.Count-1);
 
         }
 
@@ -88,10 +89,10 @@ namespace ConsoleApplication1
                     if (GombList.ElementAt(0) != gombj)
                     {
 
-                        if ((GombList.ElementAt(0).getY() >= gombj.getY() && GombList.ElementAt(0).getY() <= gombj.getY() + gombj.getSize()) && (GombList.ElementAt(0).getX() >= gombj.getX() && GombList.ElementAt(0).getX() <= gombj.getX() + gombj.getSize())) return true;
-                        if ((GombList.ElementAt(0).getY() >= gombj.getY() && GombList.ElementAt(0).getY() <= gombj.getY() + gombj.getSize()) && (GombList.ElementAt(0).getX() + GombList.ElementAt(0).getSize() >= gombj.getX() && GombList.ElementAt(0).getX() + GombList.ElementAt(0).getSize() <= gombj.getX() + gombj.getSize())) return true;
-                        if ((GombList.ElementAt(0).getY()+GombList.ElementAt(0).getSize() >= gombj.getY() && GombList.ElementAt(0).getY()+GombList.ElementAt(0).getSize() <= gombj.getY()+gombj.getSize()) && (GombList.ElementAt(0).getX() >= gombj.getX() && GombList.ElementAt(0).getX() <= gombj.getX() + gombj.getSize())) return true;
-                        if ((GombList.ElementAt(0).getY()+GombList.ElementAt(0).getSize() >= gombj.getY() && GombList.ElementAt(0).getY()+GombList.ElementAt(0).getSize() <= gombj.getY()+gombj.getSize()) && (GombList.ElementAt(0).getX() + GombList.ElementAt(0).getSize() >= gombj.getX() && GombList.ElementAt(0).getX() + GombList.ElementAt(0).getSize() <= gombj.getX() + gombj.getSize())) return true;
+                        if ((GombList.ElementAt(0).getY() >= gombj.getY() && GombList.ElementAt(0).getY() <= gombj.getY() + gombj.getSize()) && (GombList.ElementAt(0).getX() >= gombj.getX() && GombList.ElementAt(0).getX() <= gombj.getX() + gombj.getSize())) { collgomb =gombj;return true; }
+                        if ((GombList.ElementAt(0).getY() >= gombj.getY() && GombList.ElementAt(0).getY() <= gombj.getY() + gombj.getSize()) && (GombList.ElementAt(0).getX() + GombList.ElementAt(0).getSize() >= gombj.getX() && GombList.ElementAt(0).getX() + GombList.ElementAt(0).getSize() <= gombj.getX() + gombj.getSize())) { collgomb = gombj; return true; }
+                        if ((GombList.ElementAt(0).getY() + GombList.ElementAt(0).getSize() >= gombj.getY() && GombList.ElementAt(0).getY() + GombList.ElementAt(0).getSize() <= gombj.getY() + gombj.getSize()) && (GombList.ElementAt(0).getX() >= gombj.getX() && GombList.ElementAt(0).getX() <= gombj.getX() + gombj.getSize())) { collgomb = gombj; return true; }
+                        if ((GombList.ElementAt(0).getY() + GombList.ElementAt(0).getSize() >= gombj.getY() && GombList.ElementAt(0).getY() + GombList.ElementAt(0).getSize() <= gombj.getY() + gombj.getSize()) && (GombList.ElementAt(0).getX() + GombList.ElementAt(0).getSize() >= gombj.getX() && GombList.ElementAt(0).getX() + GombList.ElementAt(0).getSize() <= gombj.getX() + gombj.getSize())) { collgomb = gombj; return true; }
                     
                     }
                 }

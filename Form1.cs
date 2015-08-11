@@ -27,7 +27,7 @@ namespace Agario
         Matrix matrix1 = new Matrix();
         public int i;
         private int curX, curY;
-        Image<Bgr, Byte> img = new Image<Bgr, Byte>(868, 301, new Bgr(255, 255, 255));
+        Image<Bgr, Byte> img = new Image<Bgr, Byte>(800, 600, new Bgr(255, 255, 255));
 
         
 
@@ -58,9 +58,9 @@ namespace Agario
         {
             if (curX != matrix1.GombList.ElementAt(0).getX() || curY != matrix1.GombList.ElementAt(0).getY())
             {
-                for (int i = curY; i < curY + matrix1.GombList.ElementAt(0).getSize()+1; i++)
+                for (int i = curY; i < curY + matrix1.GombList.ElementAt(0).getSize(); i++)
                 {
-                    for (int j = curX; j < curX + matrix1.GombList.ElementAt(0).getSize() + 1; j++)
+                    for (int j = curX; j < curX + matrix1.GombList.ElementAt(0).getSize(); j++)
                     {
                         img[i, j] = new Bgr(255, 255, 255);
                     }
@@ -73,13 +73,22 @@ namespace Agario
             if (matrix1.collision())
             {
 
-                MessageBox.Show("Oops");
+                for (int a = matrix1.collgomb.getY(); a < matrix1.collgomb.getY() + matrix1.collgomb.getSize(); a++)
+                {
+                    for (int b = matrix1.collgomb.getX(); b < matrix1.collgomb.getX() + matrix1.collgomb.getSize(); b++)
+                    {
+                        img[a, b] = new Bgr(0, 0, 0);
+                    }
+
+                }
+                imageBox1.Image = img;
+               // MessageBox.Show("Oops");
 
             }
 
-            for (int i = matrix1.GombList.ElementAt(0).getY(); i < matrix1.GombList.ElementAt(0).getY() + matrix1.GombList.ElementAt(0).getSize() + 1; i++)
+            for (int i = matrix1.GombList.ElementAt(0).getY(); i < matrix1.GombList.ElementAt(0).getY() + matrix1.GombList.ElementAt(0).getSize(); i++)
             {
-                for (int j = matrix1.GombList.ElementAt(0).getX(); j < matrix1.GombList.ElementAt(0).getX() + matrix1.GombList.ElementAt(0).getSize() + 1; j++)
+                for (int j = matrix1.GombList.ElementAt(0).getX(); j < matrix1.GombList.ElementAt(0).getX() + matrix1.GombList.ElementAt(0).getSize(); j++)
                 {
                     img[i, j] = new Bgr(0, 0, 0);
                 }
@@ -134,7 +143,6 @@ namespace Agario
             }
         }
 
-
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
@@ -143,87 +151,39 @@ namespace Agario
         private void button1_Click(object sender, EventArgs e)
         {
 
+           // MessageBox.Show(matrix1.GombList.Count.ToString());
             matrix1.Add(i);
             foreach(var gomb in matrix1.GombList)
             {
-                for (int a = gomb.getY(); a < gomb.getY() + gomb.getSize()+1; a++)
+                for (int a = gomb.getY(); a < gomb.getY() + gomb.getSize(); a++)
                 {
-                    for (int b = gomb.getX(); b < gomb.getX() + gomb.getSize()+1; b++)
+                    for (int b = gomb.getX(); b < gomb.getX() + gomb.getSize(); b++)
                     {
                         img[a, b] = new Bgr(0, 0, 0);
                     }
                 }
-                imageBox1.Image = img;
             }
+                imageBox1.Image = img;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (matrix1.GombList.Count - 1 <= 0) return;
+            for (int a = matrix1.GombList.ElementAt(matrix1.GombList.Count-1).getY(); a < matrix1.GombList.ElementAt(matrix1.GombList.Count-1).getY() + matrix1.GombList.ElementAt(matrix1.GombList.Count-1).getSize(); a++)
+            {
+                for (int b = matrix1.GombList.ElementAt(matrix1.GombList.Count-1).getX(); b < matrix1.GombList.ElementAt(matrix1.GombList.Count-1).getX() + matrix1.GombList.ElementAt(matrix1.GombList.Count-1).getSize(); b++)
+                {
+                    img[a, b] = new Bgr(255, 255, 255);
+                }
+            }
+            imageBox1.Image = img;
+            matrix1.Remove();
 
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-            textBox2.Text = matrix1.GombList.ElementAt(i).getX().ToString();
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            textBox3.Text = matrix1.GombList.ElementAt(i).getY().ToString();
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            matrix1.moveDIR(matrix1.GombList.ElementAt(i), 6);
-            textBox2.Text = matrix1.GombList.ElementAt(i).getX().ToString();
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            matrix1.moveDIR(matrix1.GombList.ElementAt(i), 2);
-            textBox2.Text = matrix1.GombList.ElementAt(i).getX().ToString();
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            matrix1.moveDIR(matrix1.GombList.ElementAt(i), 0);
-            textBox3.Text = matrix1.GombList.ElementAt(i).getY().ToString();
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            matrix1.moveDIR(matrix1.GombList.ElementAt(i), 4);
-            textBox3.Text = matrix1.GombList.ElementAt(i).getY().ToString();
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            matrix1.moveDIR(matrix1.GombList.ElementAt(i), rnd.Next(0, 8));
-            textBox2.Text = matrix1.GombList.ElementAt(i).getX().ToString();
-            textBox3.Text = matrix1.GombList.ElementAt(i).getY().ToString();
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            //matrix1.Keyb(matrix1.gomb[i]);
         }
 
         private void button11_Click(object sender, EventArgs e)

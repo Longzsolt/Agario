@@ -22,10 +22,11 @@ namespace ConsoleApplication1
             this.y =  1;
             this.size = 4;
             this.xMax = 800;
-            this.yMax = 300;
+            this.yMax = 600;
             this.Name = "gomb";
 
         }
+
         public void setX(int x)
         {
 
@@ -71,7 +72,7 @@ namespace ConsoleApplication1
         public int getSize()
         {
 
-            return size-1;
+            return size;
 
         }
 
