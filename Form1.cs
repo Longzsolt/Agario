@@ -48,9 +48,26 @@ namespace Agario
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             //this.KeyPress += new KeyPressEventHandler(Form1_KeyPress);
-            textBox1.Text = "gomb" + i;
+            textBox1.Text = matrix1.GombList.Count.ToString();
 
 
+
+        }
+
+        private void setImage ()
+        {
+
+            foreach (var gomb in matrix1.GombList)
+            {
+                for (int a = gomb.getY(); a < gomb.getY() + gomb.getSize(); a++)
+                {
+                    for (int b = gomb.getX(); b < gomb.getX() + gomb.getSize(); b++)
+                    {
+                        img[a, b] = new Bgr(0, 0, 0);
+                    }
+                }
+            }
+            imageBox1.Image = img;
 
         }
 
@@ -70,32 +87,47 @@ namespace Agario
             curX = matrix1.GombList.ElementAt(0).getX();
             curY = matrix1.GombList.ElementAt(0).getY();
 
-            if (matrix1.collision())
+          /*  if (matrix1.collision())
             {
 
                 for (int a = matrix1.collgomb.getY(); a < matrix1.collgomb.getY() + matrix1.collgomb.getSize(); a++)
                 {
                     for (int b = matrix1.collgomb.getX(); b < matrix1.collgomb.getX() + matrix1.collgomb.getSize(); b++)
                     {
+
                         img[a, b] = new Bgr(0, 0, 0);
+
                     }
-
                 }
-                imageBox1.Image = img;
-               // MessageBox.Show("Oops");
-
-            }
-
-            for (int i = matrix1.GombList.ElementAt(0).getY(); i < matrix1.GombList.ElementAt(0).getY() + matrix1.GombList.ElementAt(0).getSize(); i++)
-            {
-                for (int j = matrix1.GombList.ElementAt(0).getX(); j < matrix1.GombList.ElementAt(0).getX() + matrix1.GombList.ElementAt(0).getSize(); j++)
+            }*/
+            if (matrix1.eat()) MessageBox.Show("Eat");
+                if (matrix1.collision())
                 {
-                    img[i, j] = new Bgr(0, 0, 0);
+                    for (int a = matrix1.collgomb.getY(); a < matrix1.collgomb.getY() + matrix1.collgomb.getSize(); a++)
+                    {
+                        for (int b = matrix1.collgomb.getX(); b < matrix1.collgomb.getX() + matrix1.collgomb.getSize(); b++)
+                        {
+
+                            img[a, b] = new Bgr(255, 255, 255);
+
+                        }
+                    }
+                        matrix1.GombList.ElementAt(0).setSize(matrix1.GombList.ElementAt(0).getSize() + matrix1.collgomb.getSize() / 2);
+                        matrix1.GombList.Remove(matrix1.GombList.ElementAt(matrix1.pozicio));
+                    // MessageBox.Show("Oops");
+
                 }
-            }
+                for (int i = matrix1.GombList.ElementAt(0).getY(); i < matrix1.GombList.ElementAt(0).getY() + matrix1.GombList.ElementAt(0).getSize(); i++)
+                {
+                    for (int j = matrix1.GombList.ElementAt(0).getX(); j < matrix1.GombList.ElementAt(0).getX() + matrix1.GombList.ElementAt(0).getSize(); j++)
+                    {
+                        img[i, j] = new Bgr(0, 0, 0);
+                    }
+                }
+                textBox1.Text = matrix1.GombList.Count.ToString();
+                setImage();
 
-            imageBox1.Image = img;
-
+            
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -150,20 +182,10 @@ namespace Agario
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            textBox1.Text = matrix1.GombList.Count.ToString();
            // MessageBox.Show(matrix1.GombList.Count.ToString());
             matrix1.Add(i);
-            foreach(var gomb in matrix1.GombList)
-            {
-                for (int a = gomb.getY(); a < gomb.getY() + gomb.getSize(); a++)
-                {
-                    for (int b = gomb.getX(); b < gomb.getX() + gomb.getSize(); b++)
-                    {
-                        img[a, b] = new Bgr(0, 0, 0);
-                    }
-                }
-            }
-                imageBox1.Image = img;
+            setImage();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -176,8 +198,9 @@ namespace Agario
                     img[a, b] = new Bgr(255, 255, 255);
                 }
             }
-            imageBox1.Image = img;
-            matrix1.Remove();
+            matrix1.Remove(matrix1.GombList.Count - 1);
+            textBox1.Text = matrix1.GombList.Count.ToString();
+            setImage();
 
         }
 

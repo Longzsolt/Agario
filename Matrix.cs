@@ -14,6 +14,7 @@ namespace ConsoleApplication1
     {
 
         public Gombok collgomb;
+        public int pozicio;
 
         public List <Gombok> GombList = new List <Gombok>();
 
@@ -23,7 +24,9 @@ namespace ConsoleApplication1
         {
             collgomb = new Gombok();
             Add(0);
-            GombList.ElementAt(0).setSize(4);
+            GombList.ElementAt(0).setSize(20);
+            GombList.ElementAt(0).setX(400);
+            GombList.ElementAt(0).setY(300);
         }
 
 
@@ -32,17 +35,17 @@ namespace ConsoleApplication1
 
             Gombok gomb = new Gombok();
             gomb.setSize(rnd.Next(0, 20));
-            gomb.setX(rnd.Next(0,gomb.xMax-gomb.getSize()));
-            gomb.setY(rnd.Next(0,gomb.yMax-gomb.getSize()));
+            gomb.setX(rnd.Next(0,gomb.xMax-gomb.getSize()-1));
+            gomb.setY(rnd.Next(0,gomb.yMax-gomb.getSize()-1));
             gomb.setName("gomb" + i);
             GombList.Add(gomb);
 
         }
 
-        public void Remove ()
+        public void Remove (int gomb)
         {
 
-            GombList.RemoveAt(GombList.Count-1);
+            GombList.RemoveAt(gomb);
 
         }
 
@@ -51,32 +54,32 @@ namespace ConsoleApplication1
             switch (dir)
             {
                 case 0: 
-                    gombA.moveUP();
+                    if (gombA.getY() > 0)gombA.moveUP();
                     break;
                 case 1:
-                      gombA.moveUP();
-                      gombA.moveRIGHT();
+                    if (gombA.getY() > 0) gombA.moveUP();
+                    if (gombA.getX()+gombA.getSize() < gombA.xMax) gombA.moveRIGHT();
                       break;
                 case 2:
-                      gombA.moveRIGHT();
+                      if (gombA.getX() + gombA.getSize() < gombA.xMax) gombA.moveRIGHT();
                       break;
                 case 3:
-                      gombA.moveRIGHT();
-                      gombA.moveDOWN();
+                      if (gombA.getX() + gombA.getSize() < gombA.xMax) gombA.moveRIGHT();
+                      if (gombA.getY() + gombA.getSize() < gombA.yMax) gombA.moveDOWN();
                       break;
                 case 4:
-                      gombA.moveDOWN();
+                      if (gombA.getY() + gombA.getSize() < gombA.yMax) gombA.moveDOWN();
                       break;
                 case 5:
-                      gombA.moveDOWN();
-                      gombA.moveLEFT();
+                      if (gombA.getY() + gombA.getSize() < gombA.yMax) gombA.moveDOWN();
+                      if (gombA.getX() > 0) gombA.moveLEFT();
                       break;
                 case 6:
-                      gombA.moveLEFT();
+                      if (gombA.getX() > 0) gombA.moveLEFT();
                       break;
                 case 7:
-                      gombA.moveLEFT();
-                      gombA.moveUP();
+                      if (gombA.getX() > 0) gombA.moveLEFT();
+                      if (gombA.getY() > 0) gombA.moveUP();
                       break;
             }
 
@@ -89,18 +92,34 @@ namespace ConsoleApplication1
                     if (GombList.ElementAt(0) != gombj)
                     {
 
-                        if ((GombList.ElementAt(0).getY() >= gombj.getY() && GombList.ElementAt(0).getY() <= gombj.getY() + gombj.getSize()) && (GombList.ElementAt(0).getX() >= gombj.getX() && GombList.ElementAt(0).getX() <= gombj.getX() + gombj.getSize())) { collgomb =gombj;return true; }
-                        if ((GombList.ElementAt(0).getY() >= gombj.getY() && GombList.ElementAt(0).getY() <= gombj.getY() + gombj.getSize()) && (GombList.ElementAt(0).getX() + GombList.ElementAt(0).getSize() >= gombj.getX() && GombList.ElementAt(0).getX() + GombList.ElementAt(0).getSize() <= gombj.getX() + gombj.getSize())) { collgomb = gombj; return true; }
-                        if ((GombList.ElementAt(0).getY() + GombList.ElementAt(0).getSize() >= gombj.getY() && GombList.ElementAt(0).getY() + GombList.ElementAt(0).getSize() <= gombj.getY() + gombj.getSize()) && (GombList.ElementAt(0).getX() >= gombj.getX() && GombList.ElementAt(0).getX() <= gombj.getX() + gombj.getSize())) { collgomb = gombj; return true; }
-                        if ((GombList.ElementAt(0).getY() + GombList.ElementAt(0).getSize() >= gombj.getY() && GombList.ElementAt(0).getY() + GombList.ElementAt(0).getSize() <= gombj.getY() + gombj.getSize()) && (GombList.ElementAt(0).getX() + GombList.ElementAt(0).getSize() >= gombj.getX() && GombList.ElementAt(0).getX() + GombList.ElementAt(0).getSize() <= gombj.getX() + gombj.getSize())) { collgomb = gombj; return true; }
+                        if ((GombList.ElementAt(0).getY() >= gombj.getY() && GombList.ElementAt(0).getY() <= gombj.getY() + gombj.getSize()) && (GombList.ElementAt(0).getX() >= gombj.getX() && GombList.ElementAt(0).getX() <= gombj.getX() + gombj.getSize())) { pozicio = GombList.IndexOf(gombj); collgomb = gombj; return true; }
+                        if ((GombList.ElementAt(0).getY() >= gombj.getY() && GombList.ElementAt(0).getY() <= gombj.getY() + gombj.getSize()) && (GombList.ElementAt(0).getX() + GombList.ElementAt(0).getSize() >= gombj.getX() && GombList.ElementAt(0).getX() + GombList.ElementAt(0).getSize() <= gombj.getX() + gombj.getSize())) { pozicio = GombList.IndexOf(gombj); collgomb = gombj; return true; }
+                        if ((GombList.ElementAt(0).getY() + GombList.ElementAt(0).getSize() >= gombj.getY() && GombList.ElementAt(0).getY() + GombList.ElementAt(0).getSize() <= gombj.getY() + gombj.getSize()) && (GombList.ElementAt(0).getX() >= gombj.getX() && GombList.ElementAt(0).getX() <= gombj.getX() + gombj.getSize())) { pozicio = GombList.IndexOf(gombj); collgomb = gombj; return true; }
+                        if ((GombList.ElementAt(0).getY() + GombList.ElementAt(0).getSize() >= gombj.getY() && GombList.ElementAt(0).getY() + GombList.ElementAt(0).getSize() <= gombj.getY() + gombj.getSize()) && (GombList.ElementAt(0).getX() + GombList.ElementAt(0).getSize() >= gombj.getX() && GombList.ElementAt(0).getX() + GombList.ElementAt(0).getSize() <= gombj.getX() + gombj.getSize())) { pozicio = GombList.IndexOf(gombj); collgomb = gombj; return true; }
                     
                     }
                 }
-
-            
-
-
             return false;
+        }
+
+        public bool eat ()
+        {
+            foreach (var gombj in GombList)
+            {
+                if (gombj.getSize() >= GombList.ElementAt(0).getSize()) return false;
+                if (GombList.ElementAt(0) != gombj)
+                {
+
+                    if ((GombList.ElementAt(0).getY() >= gombj.getY() && GombList.ElementAt(0).getY() <= gombj.getY() + gombj.getSize()/2) && (GombList.ElementAt(0).getX() >= gombj.getX() && GombList.ElementAt(0).getX() <= gombj.getX() + gombj.getSize()/2)) { pozicio = GombList.IndexOf(gombj); collgomb = gombj; return true; }
+                    if ((GombList.ElementAt(0).getY() >= gombj.getY() && GombList.ElementAt(0).getY() <= gombj.getY() + gombj.getSize()/2) && (GombList.ElementAt(0).getX() + GombList.ElementAt(0).getSize() >= gombj.getX() && GombList.ElementAt(0).getX() + GombList.ElementAt(0).getSize() <= gombj.getX() + gombj.getSize()/2)) { pozicio = GombList.IndexOf(gombj); collgomb = gombj; return true; }
+                    if ((GombList.ElementAt(0).getY() + GombList.ElementAt(0).getSize() >= gombj.getY() && GombList.ElementAt(0).getY() + GombList.ElementAt(0).getSize() <= gombj.getY() + gombj.getSize()/2) && (GombList.ElementAt(0).getX() >= gombj.getX() && GombList.ElementAt(0).getX() <= gombj.getX() + gombj.getSize()/2)) { pozicio = GombList.IndexOf(gombj); collgomb = gombj; return true; }
+                    if ((GombList.ElementAt(0).getY() + GombList.ElementAt(0).getSize() >= gombj.getY() && GombList.ElementAt(0).getY() + GombList.ElementAt(0).getSize() <= gombj.getY() + gombj.getSize()/2) && (GombList.ElementAt(0).getX() + GombList.ElementAt(0).getSize() >= gombj.getX() && GombList.ElementAt(0).getX() + GombList.ElementAt(0).getSize() <= gombj.getX() + gombj.getSize()/2)) { pozicio = GombList.IndexOf(gombj); collgomb = gombj; return true; }
+                    
+
+                }
+            }
+            return false;
+
         }
 
        /* public void Keyb(Gombok gomb)

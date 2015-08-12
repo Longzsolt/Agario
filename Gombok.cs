@@ -84,6 +84,7 @@ namespace ConsoleApplication1
                 return;
             }
             y--;
+            y--;
         }
 
         public void moveDOWN()
@@ -93,6 +94,7 @@ namespace ConsoleApplication1
             //    moveUP();
                 return;
             }
+            y++;
             y++;
         }
 
@@ -104,6 +106,7 @@ namespace ConsoleApplication1
                 return;
             }
             x--;
+            x--;
         }
 
         public void moveRIGHT()
@@ -113,6 +116,7 @@ namespace ConsoleApplication1
              //   moveLEFT();
                 return;
             }
+            x++;
             x++;
         }
     }
