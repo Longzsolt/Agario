@@ -26,7 +26,7 @@ namespace Agario
         Random rnd = new Random();
         Matrix matrix1 = new Matrix();
         public int i;
-        private int curX, curY;
+        private int oldX, oldY;
         Image<Bgr, Byte> img = new Image<Bgr, Byte>(800, 600, new Bgr(255, 255, 255));
 
         
@@ -38,8 +38,8 @@ namespace Agario
           //  img[200, 300] = new Bgr(0, 0, 0);
 
             imageBox1.Image = img;
-            curX = matrix1.GombList.ElementAt(0).getX();
-            curY = matrix1.GombList.ElementAt(0).getY();
+            oldX = matrix1.GombList.ElementAt(0).getX();
+            oldY = matrix1.GombList.ElementAt(0).getY();
             i = 0;
             Image_move();
             imageBox1.Image = img;
@@ -73,33 +73,24 @@ namespace Agario
 
         private void Image_move()
         {
-            if (curX != matrix1.GombList.ElementAt(0).getX() || curY != matrix1.GombList.ElementAt(0).getY())
+
+           // Eltunteti az elmozdult kocka maradvanyait  
+            if (oldX != matrix1.GombList.ElementAt(0).getX() || oldY != matrix1.GombList.ElementAt(0).getY())
             {
-                for (int i = curY; i < curY + matrix1.GombList.ElementAt(0).getSize(); i++)
+                for (int i = oldY; i < oldY + matrix1.GombList.ElementAt(0).getSize(); i++)
                 {
-                    for (int j = curX; j < curX + matrix1.GombList.ElementAt(0).getSize(); j++)
+                    for (int j = oldX; j < oldX + matrix1.GombList.ElementAt(0).getSize(); j++)
                     {
                         img[i, j] = new Bgr(255, 255, 255);
                     }
                 }
 
             }
-            curX = matrix1.GombList.ElementAt(0).getX();
-            curY = matrix1.GombList.ElementAt(0).getY();
+            oldX = matrix1.GombList.ElementAt(0).getX();
+            oldY = matrix1.GombList.ElementAt(0).getY();
+            
+            //Megeszi a kockat
 
-          /*  if (matrix1.collision())
-            {
-
-                for (int a = matrix1.collgomb.getY(); a < matrix1.collgomb.getY() + matrix1.collgomb.getSize(); a++)
-                {
-                    for (int b = matrix1.collgomb.getX(); b < matrix1.collgomb.getX() + matrix1.collgomb.getSize(); b++)
-                    {
-
-                        img[a, b] = new Bgr(0, 0, 0);
-
-                    }
-                }
-            }*/
             if (matrix1.eat()) MessageBox.Show("Eat");
                 if (matrix1.collision())
                 {
@@ -117,13 +108,7 @@ namespace Agario
                     // MessageBox.Show("Oops");
 
                 }
-                for (int i = matrix1.GombList.ElementAt(0).getY(); i < matrix1.GombList.ElementAt(0).getY() + matrix1.GombList.ElementAt(0).getSize(); i++)
-                {
-                    for (int j = matrix1.GombList.ElementAt(0).getX(); j < matrix1.GombList.ElementAt(0).getX() + matrix1.GombList.ElementAt(0).getSize(); j++)
-                    {
-                        img[i, j] = new Bgr(0, 0, 0);
-                    }
-                }
+
                 textBox1.Text = matrix1.GombList.Count.ToString();
                 setImage();
 
@@ -182,10 +167,10 @@ namespace Agario
 
         private void button1_Click(object sender, EventArgs e)
         {
-            textBox1.Text = matrix1.GombList.Count.ToString();
            // MessageBox.Show(matrix1.GombList.Count.ToString());
             matrix1.Add(i);
             setImage();
+            textBox1.Text = matrix1.GombList.Count.ToString();
         }
 
         private void button2_Click(object sender, EventArgs e)
