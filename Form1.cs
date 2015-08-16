@@ -25,7 +25,7 @@ namespace Agario
 
         Random rnd = new Random();
         Matrix matrix1 = new Matrix();
-        public int i;
+        public int i, f;
         private int oldX, oldY;
         Image<Bgr, Byte> img = new Image<Bgr, Byte>(800, 600, new Bgr(255, 255, 255));
 
@@ -41,6 +41,7 @@ namespace Agario
             oldX = matrix1.GombList.ElementAt(0).getX();
             oldY = matrix1.GombList.ElementAt(0).getY();
             i = 0;
+            f = 0;
             Image_move();
             imageBox1.Image = img;
 
@@ -56,6 +57,16 @@ namespace Agario
 
         private void setImage ()
         {
+            if (matrix1.GombList.Count < 5)
+            {
+                f = 0;
+                while (matrix1.GombList.Count < 10)
+                {
+                    f++;
+                    matrix1.Add(matrix1.GombList.Count + 1);
+                    if (f > 10) break;
+                }
+            }
 
             foreach (var gomb in matrix1.GombList)
             {
@@ -63,10 +74,12 @@ namespace Agario
                 {
                     for (int b = gomb.getX(); b < gomb.getX() + gomb.getSize(); b++)
                     {
+                        if (a > gomb.yMax - 1 || b > gomb.xMax - 1) break;
                         img[a, b] = new Bgr(0, 0, 0);
                     }
                 }
             }
+
             imageBox1.Image = img;
 
         }
@@ -91,24 +104,24 @@ namespace Agario
             
             //Megeszi a kockat
 
-            if (matrix1.eat()) MessageBox.Show("Eat");
-                if (matrix1.collision())
+            //if (matrix1.eat()) MessageBox.Show("Eat");
+                if (matrix1.eat())
                 {
+                textBox2.Text = matrix1.collgomb.getName() + " " + matrix1.collgomb.getSize().ToString();
                     for (int a = matrix1.collgomb.getY(); a < matrix1.collgomb.getY() + matrix1.collgomb.getSize(); a++)
                     {
                         for (int b = matrix1.collgomb.getX(); b < matrix1.collgomb.getX() + matrix1.collgomb.getSize(); b++)
                         {
-
+                            
                             img[a, b] = new Bgr(255, 255, 255);
 
                         }
                     }
-                        matrix1.GombList.ElementAt(0).setSize(matrix1.GombList.ElementAt(0).getSize() + matrix1.collgomb.getSize() / 2);
+                        matrix1.GombList.ElementAt(0).setSize(matrix1.GombList.ElementAt(0).getSize() + matrix1.collgomb.getSize() / 4);
                         matrix1.GombList.Remove(matrix1.GombList.ElementAt(matrix1.pozicio));
                     // MessageBox.Show("Oops");
 
                 }
-
                 textBox1.Text = matrix1.GombList.Count.ToString();
                 setImage();
 
@@ -223,6 +236,11 @@ namespace Agario
         }
 
         private void imageBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
         }

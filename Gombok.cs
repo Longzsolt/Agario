@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ConsoleApplication1
 {
+
+    // gombot rajzolni new GraphView.GraphViewData(radius * Math.cos(Math.toRadians(i)) + x, radius * Math.sin(Math.toRadians(i)) + y);
+
     public class Gombok
     {
         private int x;

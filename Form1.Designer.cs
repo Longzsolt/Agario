@@ -36,6 +36,7 @@
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.imageBox1 = new Emgu.CV.UI.ImageBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -106,11 +107,20 @@
             this.imageBox1.TabStop = false;
             this.imageBox1.Click += new System.EventHandler(this.imageBox1_Click);
             // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(612, 13);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(183, 20);
+            this.textBox2.TabIndex = 18;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(840, 659);
+            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.imageBox1);
             this.Controls.Add(this.button12);
             this.Controls.Add(this.button11);
@@ -140,6 +150,7 @@
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button12;
         private Emgu.CV.UI.ImageBox imageBox1;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }
 
